@@ -11,15 +11,15 @@ pipeline {
 
   stages {
     stage("One"){
-      print 'hello'
+     
     }
 
     stage("Two"){
-      print 'world'
+      
     }
 
     stage("Three"){
-      print 'world'
+      
     }
 
     //stage('Getting latest changes') {
