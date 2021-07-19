@@ -19,9 +19,9 @@ pipeline {
         )
         script {
             def config = readJSON file: './src/version.json'
-            systemVersion = "${config.AppVersion}"
+            systemVersion = "${config.version}"
             def digits = systemVersion.tokenize('.')
-            config['AppVersion'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
+            config['version'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
             dockerLabel = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
             // writeJSON file: './version.json', json: config
         }
