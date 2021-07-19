@@ -10,45 +10,36 @@ pipeline {
   agent any
 
   stages {
-    stage("One"){
-      steps{
-        echo "UNO"
+    stage('Getting latest changes') {
+      steps {
+        git(
+            url: 'https://github.com/JonathanmpSpark/jenkins-demo',
+            credentialsId: 'github-demo-01',
+            branch: "staging"
+        )
+        script {
+            def config = readJSON file: './version.json'
+            systemVersion = "${config.AppVersion}"
+            def digits = systemVersion.tokenize('.')
+            config['AppVersion'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
+            dockerLabel = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
+            // writeJSON file: './version.json', json: config
+        }
       }
     }
 
-    stage("Two"){
+    stage("Display container tag..."){
       steps{
-        echo "DOS"
+        echo "Container tag: "  + dockerLabel
       }
     }
 
-    stage("Three"){
+    stage("Display build number..."){
       steps{
-        echo "TRES"
-        echo "$BUILD_NUMBER"
-        echo "$BUILD_NUMBER"
-        echo "$BUILD_NUMBER"
+        echo "Build number: "  + "$BUILD_NUMBER"
       }
     }
 
-    //stage('Getting latest changes') {
-      // steps {
-      //   git(
-      //       url: 'https://github.com/JonathanmpSpark/jenkins-demo',
-      //       credentialsId: 'github-demo-01',
-      //       branch: "staging"
-      //   )
-      //   script {
-      //       def config = readJSON file: './version.json'
-      //       systemVersion = "${config.AppVersion}"
-      //       def digits = systemVersion.tokenize('.')
-      //       config['AppVersion'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
-      //       dockerLabel = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
-
-      //       //print dockerLabel
-      //       // writeJSON file: './version.json', json: config
-      //   }
-      // }
-    //}
+    
   }
 }
