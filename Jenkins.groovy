@@ -11,19 +11,19 @@ pipeline {
 
   stages {
     stage("One"){
-      step{
+      steps{
         echo "UNO"
       }
     }
 
     stage("Two"){
-      step{
+      steps{
         echo "DOS"
       }
     }
 
     stage("Three"){
-      step{
+      steps{
         echo "TRES"
       }
     }
