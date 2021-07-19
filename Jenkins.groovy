@@ -11,7 +11,7 @@ pipeline {
     stage('Getting latest changes') {
       steps {
         git(
-            url: 'https://github.com/sparktechsllc/SPARKGAM.git',
+            url: 'https://github.com/JonathanmpSpark/jenkins-demo',
             credentialsId: 'github-demo-01',
             branch: "staging"
         )
