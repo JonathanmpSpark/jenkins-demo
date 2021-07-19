@@ -6,22 +6,19 @@ pipeline {
     systemVersion = "latest"
     dockerLabel = ''
   }
-  
+
   agent any
 
   stages {
     stage("One"){
-      sleep 1
       echo 'hello'
     }
 
     stage("Two"){
-      sleep 1
       echo 'world'
     }
 
     stage("Three"){
-      sleep 1
       echo 'world'
     }
 
