@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "jonathanmpspark/jenkins-demo"
-    registryCredential = 'dockerhub-demo-01'
+    registryCredential = 'demo-dockerhub'
     dockerImage = ''
     systemVersion = "latest"
     dockerLabel = ''
@@ -14,7 +14,7 @@ pipeline {
       steps {
         git(
             url: 'https://github.com/JonathanmpSpark/jenkins-demo',
-            credentialsId: 'github-demo-01',
+            credentialsId: 'demo-github',
             branch: "staging"
         )
         script {

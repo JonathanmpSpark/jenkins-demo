@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 
-src/docker/jenkins*
+src/docker*
+src/docker/
+src/docker/*
