@@ -25,6 +25,9 @@ pipeline {
     stage("Three"){
       steps{
         echo "TRES"
+        echo "$BUILD_NUMBER"
+        echo "$BUILD_NUMBER"
+        echo "$BUILD_NUMBER"
       }
     }
 
