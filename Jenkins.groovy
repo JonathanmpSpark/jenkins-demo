@@ -6,19 +6,26 @@ pipeline {
     systemVersion = "latest"
     dockerLabel = ''
   }
+  
   agent any
+
   stages {
-    stage('Getting latest changes') {
+    stage("One"){
+      sleep 1
+      echo 'hello'
+    }
 
-      stage("One"){
-            sleep 1
-            echo 'hello'
-      }
+    stage("Two"){
+      sleep 1
+      echo 'world'
+    }
 
-      stage("Two"){
-            sleep 1
-            echo 'world'
-      }
+    stage("Three"){
+      sleep 1
+      echo 'world'
+    }
+
+    //stage('Getting latest changes') {
       // steps {
       //   git(
       //       url: 'https://github.com/JonathanmpSpark/jenkins-demo',
@@ -36,6 +43,6 @@ pipeline {
       //       // writeJSON file: './version.json', json: config
       //   }
       // }
-    }
+    //}
   }
 }
