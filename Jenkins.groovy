@@ -22,29 +22,29 @@ pipeline {
             config['AppVersion'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
             dockerLabel = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
 
-            echo dockerLabel
+            print dockerLabel
             // writeJSON file: './version.json', json: config
         }
       }
     }
     stage('Building image') {
-        // steps {
+        steps {
         //   script {
         //     dockerImage = docker.build(registry + ":" + dockerLabel,"-f ./dockerfiles/Webapp/Dockerfile ./")
         //   }
-        // }
+        }
     }
     stage('Upload docker image to registry') {
-    //   steps{
+      steps{
     //     script {
     //       docker.withRegistry( '', registryCredential ) {
     //         dockerImage.push()
     //       }
     //     }
-    //   }
+      }
     }
     stage('Deploy container to production') {
-        // steps{
+        steps{
         //     script {
         //         def remote = [:]
         //         remote.name = "prod"
@@ -62,7 +62,7 @@ pipeline {
         //         }
         //     }
           
-        // }
+        }
         
     }
   }
