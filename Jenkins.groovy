@@ -11,15 +11,21 @@ pipeline {
 
   stages {
     stage("One"){
-     
+      step{
+        echo "UNO"
+      }
     }
 
     stage("Two"){
-      
+      step{
+        echo "DOS"
+      }
     }
 
     stage("Three"){
-      
+      step{
+        echo "TRES"
+      }
     }
 
     //stage('Getting latest changes') {
