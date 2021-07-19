@@ -6,7 +6,7 @@ services:
     build:
         context: .
         dockerfile: ./src/docker/web/Dockerfile
-    container_name: django_web
+    #container_name: django_web
     ports:
       - '8080:80'
     volumes:
