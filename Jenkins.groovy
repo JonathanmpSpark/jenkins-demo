@@ -11,15 +11,15 @@ pipeline {
 
   stages {
     stage("One"){
-      echo 'hello'
+      print 'hello'
     }
 
     stage("Two"){
-      echo 'world'
+      print 'world'
     }
 
     stage("Three"){
-      echo 'world'
+      print 'world'
     }
 
     //stage('Getting latest changes') {
