@@ -18,7 +18,7 @@ pipeline {
             branch: "staging"
         )
         script {
-            def config = readJSON file: './version.json'
+            def config = readJSON file: '.src/version.json'
             systemVersion = "${config.AppVersion}"
             def digits = systemVersion.tokenize('.')
             config['AppVersion'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
