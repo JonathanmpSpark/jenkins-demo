@@ -5,11 +5,11 @@ services:
     image: jonathanmpspark/jenkins-demo
     build:
         context: .
-        dockerfile: ./docker/web/Dockerfile
+        dockerfile: ./src/docker/web/Dockerfile
     container_name: django_web
     ports:
       - '8080:80'
     volumes:
-       - .:/app
+       - ./src:/app
     command: /start
     restart: unless-stopped
