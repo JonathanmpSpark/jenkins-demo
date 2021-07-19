@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  jenkins_web:
+    image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins
+    ports:
+      - '8081:8080'
+      - '50000:50000'
+    volumes:
+      - ./docker/jenkins/jenkins_home:/var/jenkins_home
+    restart: unless-stopped
