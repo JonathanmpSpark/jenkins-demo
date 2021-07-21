@@ -53,7 +53,7 @@ pipeline {
                 remote.name = "macbookpro"
                 remote.host = "192.168.0.13"
                 remote.allowAnyHosts = true
-                withCredentials([usernamePassword(credentialsId: 'prodServer', passwordVariable: 'password', usernameVariable: 'userName')]) {
+                withCredentials([usernamePassword(credentialsId: 'demo-prod', passwordVariable: 'password', usernameVariable: 'userName')]) {
                         
                     remote.user = userName
                     remote.password = password
