@@ -1,7 +1,7 @@
-FROM python:3
-##FROM python:3-alpine
+##FROM python:3
+FROM python:3-alpine
 ENV PYTHONUNBUFFERED=1
-##RUN apk add binutils libc-dev
+RUN apk add binutils libc-dev
 
 WORKDIR /app
 
