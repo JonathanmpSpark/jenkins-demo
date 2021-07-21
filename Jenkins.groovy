@@ -31,7 +31,7 @@ pipeline {
     stage("Building docker image"){
       steps{
         script {
-          dockerImage = docker.build(registry + ":" + dockerLabel,"-f ./docker/web/Dockerfile ./")
+          dockerImage = docker.build(registry + ":" + dockerLabel,"-f ./src/docker/web/Dockerfile ./")
         }
       }
     }
