@@ -46,28 +46,18 @@ pipeline {
       }
     }
 
-    stage('Deploy container to production') {
-      steps{
-            script {
-                def remote = [:]
-                remote.name = "macbookpro"
-                remote.host = "192.168.0.13"
-                remote.allowAnyHosts = true
-                withCredentials([usernamePassword(credentialsId: 'demo-prod', passwordVariable: 'password', usernameVariable: 'userName')]) {
-                        
-                    remote.user = userName
-                    remote.password = password
-                    sshCommand remote: remote, command: 'docker pull ' + registry + ":" + dockerLabel
-                    sshCommand remote: remote, command: 'docker container stop django_web'
-                    sshCommand remote: remote, command: 'docker container rm django_web'
-                    sshCommand remote: remote, command: 'docker run -p 8081:80 -d ' + registry + ":" + dockerLabel
-                    
-                }
-            }
-          
+    stage('Deploy container to qa server') {
+      steps {
+        script {
+            sh 'docker stop demo-django'
+        }
+        script {
+            sh 'docker rm demo-django'
+        }
+        script {
+            sh 'docker run -p 8085:80  --name demo-django -d ' + registry + ":" + dockerLabel
+        }
       }  
     }
-
-    
   }
 }
