@@ -55,7 +55,7 @@ pipeline {
             sh 'docker rm demo-django'
         }
         script {
-            sh 'docker run -p 8085:80  --name demo-django -d ' + registry + ":" + dockerLabel
+            sh 'docker run -p 8085:80  --name demo-django -d ' + registry + ":" + dockerLabel + 'sh -c "cd src && /start"'
         }
       }  
     }
