@@ -10,7 +10,7 @@ pipeline {
   agent any
 
   stages {
-    stage('get last changes from github') {
+    stage('Getting last changes from github') {
       steps {
         git(
             url: 'https://github.com/JonathanmpSpark/jenkins-demo',
@@ -23,7 +23,7 @@ pipeline {
             def digits = systemVersion.tokenize('.')
             config['version'] = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
             dockerLabel = "" + digits.get(0) + "." + digits.get(1) + "." + digits.get(2) + "." + "$BUILD_NUMBER"
-            writeJSON file: './src/version.json', json: config
+            //writeJSON file: './src/version.json', json: config
         }
       }
     }
