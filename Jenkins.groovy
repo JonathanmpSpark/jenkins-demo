@@ -10,7 +10,7 @@ pipeline {
   agent any
 
   stages {
-    stage('Getting latest changes') {
+    stage('get last changes from github') {
       steps {
         git(
             url: 'https://github.com/JonathanmpSpark/jenkins-demo',
@@ -28,16 +28,44 @@ pipeline {
       }
     }
 
-    stage("Display container tag..."){
+    stage("Building docker image"){
       steps{
-        echo "Container tag: "  + dockerLabel
+        script {
+          dockerImage = docker.build(registry + ":" + dockerLabel,"-f ./docker/web/Dockerfile ./")
+        }
       }
     }
 
-    stage("Display build number..."){
+    stage("Push image to dockerhub"){
       steps{
-        echo "Build number: "  + "$BUILD_NUMBER"
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
       }
+    }
+
+    stage('Deploy container to production') {
+      steps{
+            script {
+                def remote = [:]
+                remote.name = "macbookpro"
+                remote.host = "192.168.0.13"
+                remote.allowAnyHosts = true
+                withCredentials([usernamePassword(credentialsId: 'prodServer', passwordVariable: 'password', usernameVariable: 'userName')]) {
+                        
+                    remote.user = userName
+                    remote.password = password
+                    sshCommand remote: remote, command: 'docker pull ' + registry + ":" + dockerLabel
+                    sshCommand remote: remote, command: 'docker container stop django_web'
+                    sshCommand remote: remote, command: 'docker container rm django_web'
+                    sshCommand remote: remote, command: 'docker run -p 8081:80 -d ' + registry + ":" + dockerLabel
+                    
+                }
+            }
+          
+      }  
     }
 
     
