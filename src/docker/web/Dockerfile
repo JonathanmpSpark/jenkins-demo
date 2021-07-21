@@ -14,3 +14,5 @@ RUN sed -i 's/\r$//g' /start
 RUN chmod +x /start
 
 COPY . /app/
+
+CMD '/start'
