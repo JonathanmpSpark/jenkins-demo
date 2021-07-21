@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse('index view')
+    return HttpResponse('HELLO!')
 
 
 urlpatterns = [
